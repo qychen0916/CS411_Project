@@ -1,0 +1,9 @@
+# Proposals
+
+## Proposal 1 - Finding the Best Course Plan for Hub
+
+The goal of this project is to provide students at Boston University with course plans that complete their major requirements and HUB requirements at the same time by integrating their academic interests with BU course search and Degree Advice services. Currently, there is no online tool that provides students with such recommended course plans, and the complicated HUB system can be quite confusing when combined with the expansive range of courses offered at BU. Our project will provide students with the most efficient combination of courses by looking at their current major/HUB progress as well as the HUB units associated with different courses. As an added feature, we can incorporate the user’s interests outside of their major/minor requirements to match them with HUB classes that would be the most interesting to them using keywords in the course descriptions. 
+
+## Proposal 2 - Music Transfer Between Apple Music and Spotify
+
+The goal of this project is to allow users to access and share their playlists across Spotify and Apple Music by streamlining the transfer of music playlists between the two different platforms. Currently, users with both services or who switch from one to the other must go through the tedious process of manually recreating their playlists or starting from scratch. We will use the Spotify and Apple Music APIs to pull the songs from a playlist on one platform and search them on the other. If the songs are available, we will organize them into a new Playlist in the destination platform with the same title and artist as the one in source platform. This project will allow for easy and efficient transition between Spotify and Apple Music, two of the most common music streaming services used globally.
