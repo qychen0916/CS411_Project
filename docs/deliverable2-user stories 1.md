@@ -1,0 +1,4 @@
+# Requirements Analysis and User Stories 1
+
+## As a user, I want to login in with my Spotify account and my Apple Music account in order to allow the application to transfer my music to Apple Music.
+If the user is not authenticated, the user will be prompted to login using their Spotify account. This will allow the application to access the user’s playlists, which can then be transferred to Apple Music. Once the user has successfully logged in with their Spotify account, the user shall be prompted to login using their Apple Music account. This will allow the application to access the user’s Apple Music account, where Spotify playlists will be transferred. Once both accounts are successfully logged in, the user shall be able to use the application’s features to transfer music from Spotify to Apple Music. If the login process fails at any point, an error message shall inform the user that login has failed. Then, the user shall be prompted to attempt logging in again.
