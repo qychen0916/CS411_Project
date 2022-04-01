@@ -10,9 +10,11 @@ import Login from "./pages/Login";
 // this allows us to do this: axios.get('/users')
 axios.defaults.baseURL = 'http://localhost:5000';
 
+// handles routes (i.e. pages in our app)
 const App = () => {
   return (
     <Routes>
+      {/* MainLayout is applied to everything inside of it */}
       <Route element={<MainLayout/>}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
