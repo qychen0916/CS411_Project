@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import axios from 'axios';
 
-function App() {
+import MainLayout from "./components/MainLayout";
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+
+// instead of accessing our api like this: axios.get('http://localhost:5000/users')
+// this allows us to do this: axios.get('/users')
+axios.defaults.baseURL = 'http://localhost:5000';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route element={<MainLayout/>}>
+        <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Route>
+    </Routes>
   );
 }
 
