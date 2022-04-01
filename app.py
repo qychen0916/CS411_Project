@@ -1,13 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
+app.config["MONGO_URI"] = "mongodb://localhost:27017/cs411"
+mongo = PyMongo(app)
 
 @app.route('/')
 def hello_world():
-    return 'This is my first API call!'
-
-@app.route('/post', methods=["POST"])
-def testpost():
-  input_json = request.get_json(force=True)
-  dictToReturn = {'text':input_json['text']}
-  return jsonify(dictToReturn)
+    return jsonify({"message": "Hello, World!"})
