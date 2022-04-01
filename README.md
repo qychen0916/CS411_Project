@@ -15,4 +15,5 @@
 
 1. Install Python 3.X: https://www.python.org/downloads/
 2. Install dependencies: `pip3 install -r requirements.txt`
-3. Start Flask server: `flask run`
+3. Enable development mode: `export FLASK_ENV=development`
+4. Start Flask server: `flask run`
