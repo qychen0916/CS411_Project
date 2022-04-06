@@ -53,13 +53,14 @@ def names():
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+import api_keys
 
 # get the artist name from front end, then hit Spotify api and display albums on the front end
 @app.route('/albumsearch', methods=['GET','POST'])
 def getalbumsbyname():
     album_list = []
     
-    client_credentials_manager = SpotifyClientCredentials(client_id='<client_id>',client_secret='<client_secret>')
+    client_credentials_manager = SpotifyClientCredentials(client_id=api_keys.spotify_id,client_secret=api_keys.spotify_secret)
     spotify = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
     
     if request.method == 'POST':

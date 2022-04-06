@@ -17,3 +17,6 @@
 2. Install dependencies: `pip3 install -r requirements.txt`
 3. Enable development mode: `export FLASK_ENV=development`
 4. Start Flask server: `flask run`
+
+## For Deliverable 3
+- go to /albums
