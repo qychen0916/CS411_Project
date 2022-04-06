@@ -42,6 +42,41 @@ def names():
     for name in mongo.db.names.find():
         name['_id'] = str(name['_id']) # https://stackoverflow.com/a/64267192
         data.append(name)
-
-    # return names from the database
+        
+    # return names from the database, here data is a list
     return jsonify({"names": data})
+
+
+#################
+# Deliverable 3 #
+#################
+
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+import api_keys
+
+# get the artist name from front end, then hit Spotify api and display albums on the front end
+@app.route('/albumsearch', methods=['GET','POST'])
+def getalbumsbyname():
+    album_list = []
+    
+    client_credentials_manager = SpotifyClientCredentials(client_id=api_keys.spotify_id,client_secret=api_keys.spotify_secret)
+    spotify = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
+    
+    if request.method == 'POST':
+        aname = request.get_json()['artistName']
+            
+        artist_result = spotify.search(q='artist:' + aname, type='artist')
+        artist_uri = artist_result['artists']['items'][0]['uri']
+        #print(artist_uri)
+        
+        album_result = spotify.artist_albums(artist_uri, album_type='album')
+        albums = album_result['items']
+        while album_result['next']:
+            album_result = spotify.next(album_result)
+            albums.extend(album_result['items'])
+            
+        album_list = [album['name'] for album in albums]
+        #print(album_list)
+    
+    return jsonify({"albums": album_list})
