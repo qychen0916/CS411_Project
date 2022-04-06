@@ -5,6 +5,7 @@ import MainLayout from "./components/MainLayout";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Albums from "./pages/Albums"
 
 // instead of accessing our api like this: axios.get('http://localhost:5000/users')
 // this allows us to do this: axios.get('/users')
@@ -18,6 +19,7 @@ const App = () => {
       <Route element={<MainLayout/>}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/albums" element={<Albums />} />
       </Route>
     </Routes>
   );
