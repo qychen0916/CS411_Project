@@ -14,9 +14,18 @@
 ## Setting up the Back-End
 
 1. Install Python 3.X: https://www.python.org/downloads/
-2. Install dependencies: `pip3 install -r requirements.txt`
-3. Enable development mode: `export FLASK_ENV=development`
-4. Start Flask server: `flask run`
+2. It is recommended that you set up a Python virtual environment: https://docs.python.org/3/tutorial/venv.html
+3. Install dependencies: `pip3 install -r requirements.txt`
+4. Enable development mode: `export FLASK_ENV=development`
+5. Start Flask server: `flask run`
 
 ## For Deliverable 3
-- go to /albums
+
+1. Get your Spotify client id and client secret from https://developer.spotify.com/dashboard/login
+2. Create a blank .py file in the your local folder using the name api_keys.py
+3. Write the following lines of code in your api_keys.py:
+  > spotify_id = 'yourClientId' 
+
+  > spotify_secret = 'yourClientSecret'
+
+4. Now you are ready to checkout the new search function! Start the front end and the back end, then go to the /albums page. api_keys.py is added to .gitignore so your api keys will not be pushed to git when you commit new changes.
