@@ -4,7 +4,7 @@
 api_keys.py
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
 
