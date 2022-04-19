@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request
+import requests
+from flask import Flask, jsonify, request, redirect, session
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 
@@ -54,6 +55,7 @@ def names():
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import api_keys
+import startup
 
 # get the artist name from front end, then hit Spotify api and display albums on the front end
 @app.route('/albumsearch', methods=['GET','POST'])
@@ -80,3 +82,25 @@ def getalbumsbyname():
         #print(album_list)
     
     return jsonify({"albums": album_list})
+
+#################
+# Spotify OAuth #
+#################
+
+@app.route('/login')
+def login():
+    response = startup.getUser()
+    return jsonify({"redirect": response})
+
+@app.route('/callback/')
+def callback():
+    startup.getUserToken(request.args['code'])
+    token = startup.getAccessToken()
+
+    return redirect('http://localhost:3000')
+
+@app.route('/playlists', methods=['GET'])
+def get_playlists():
+    token = startup.getAccessToken()
+    get = requests.get('https://api.spotify.com/v1/me/playlists', headers=token[1])
+    return jsonify({"playlists": get.json()})

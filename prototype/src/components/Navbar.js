@@ -20,6 +20,7 @@ const Navbar = () => {
             CS411 Project
           </Link>
           <Button color="inherit" component={RouterLink} to="/">Home</Button>
+          <Button color="inherit" component={RouterLink} to="/playlists">Playlists</Button>
           <Button color="inherit" component={RouterLink} to="/login">Login</Button>
         </Toolbar>
       </AppBar>
