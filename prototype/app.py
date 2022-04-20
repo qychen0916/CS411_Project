@@ -94,13 +94,34 @@ def login():
 
 @app.route('/callback/')
 def callback():
-    startup.getUserToken(request.args['code'])
-    token = startup.getAccessToken()
+    # error case (e.g. user denied access)
+    if request.args.get('error'):
+        return redirect('http://localhost:3000')
 
+    # get the authorization code and redirect to the front end
+    startup.getUserToken(request.args.get('code'))
     return redirect('http://localhost:3000')
 
 @app.route('/playlists', methods=['GET'])
 def get_playlists():
-    token = startup.getAccessToken()
+    token = startup.getAccessToken() # get the access token
+
+    # no user token, success false
+    if not token:
+        return jsonify({"playlists": [], "success": False})
+
+    # get the user's playlists
     get = requests.get('https://api.spotify.com/v1/me/playlists', headers=token[1])
-    return jsonify({"playlists": get.json()})
+    return jsonify({"playlists": get.json(), "success": True})
+
+@app.route('/playlist', methods=['GET'])
+def get_playlist():
+    token = startup.getAccessToken() # get the access token
+
+    # no playlist ID or user token found; error case
+    if (not request.args.get('id')) or not token:
+        return jsonify({"success": False})
+
+    # get the playlist
+    get = requests.get('https://api.spotify.com/v1/playlists/' + request.args.get('id'), headers=token[1])
+    return jsonify({"playlist": get.json(), "success": True})

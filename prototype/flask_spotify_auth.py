@@ -7,7 +7,7 @@ HEADER = 'application/x-www-form-urlencoded'
 REFRESH_TOKEN = ''
     
 def getAuth(client_id, redirect_uri, scope):
-    data = "{}client_id={}&response_type=code&redirect_uri={}&scope={}".format(SPOTIFY_URL_AUTH, client_id, redirect_uri, scope) 
+    data = "{}client_id={}&response_type=code&redirect_uri={}&scope={}&show_dialog=true".format(SPOTIFY_URL_AUTH, client_id, redirect_uri, scope) 
     return data
 
 def getToken(code, client_id, client_secret, redirect_uri):
