@@ -1,5 +1,5 @@
 import {
-  Box, Typography
+  Box, Typography, CircularProgress
 } from '@mui/material';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -17,8 +17,12 @@ const Login = () => {
 
   return (
     <Box>
-      <Typography variant="h3" mb={2}>Login</Typography>
-      <Typography>Example Login Page</Typography>
+      <Typography variant="body1" mb={2}>
+        Redirecting to Spotify Auth...
+      </Typography>
+      <Box>
+        <CircularProgress />
+      </Box>
     </Box>
   )
 }
