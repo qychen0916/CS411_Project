@@ -1,17 +1,25 @@
+import { useEffect, useState } from 'react';
 import {
   AppBar,
   Toolbar,
   Box,
-  IconButton,
   Button,
-  Typography,
   Link
 } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
-
-import MenuIcon from '@mui/icons-material/Menu';
+import axios from 'axios';
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // check if the user is logged in
+  useEffect(() => {
+    axios.get('/amILoggedIn')
+      .then(res => {
+        setIsLoggedIn(res.data.isLoggedIn);
+      })
+  }, []);
+
   return (
   <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -20,7 +28,10 @@ const Navbar = () => {
             CS411 Project
           </Link>
           <Button color="inherit" component={RouterLink} to="/">Home</Button>
-          <Button color="inherit" component={RouterLink} to="/login">Login</Button>
+          <Button color="inherit" component={RouterLink} to="/playlists">Playlists</Button>
+          <Button color="inherit" component={RouterLink} to="/login">
+            {isLoggedIn ? 'Switch Accounts' : 'Login'}
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request
+import requests
+from flask import Flask, jsonify, request, redirect, session
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 
@@ -54,6 +55,7 @@ def names():
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import api_keys
+import startup
 
 # get the artist name from front end, then hit Spotify api and display albums on the front end
 @app.route('/albumsearch', methods=['GET','POST'])
@@ -80,3 +82,56 @@ def getalbumsbyname():
         #print(album_list)
     
     return jsonify({"albums": album_list})
+
+#################
+# Spotify OAuth #
+#################
+
+@app.route('/login')
+def login():
+    response = startup.getUser()
+    return jsonify({"redirect": response})
+
+@app.route('/callback/')
+def callback():
+    # error case (e.g. user denied access)
+    if request.args.get('error'):
+        return redirect('http://localhost:3000')
+
+    # get the authorization code and redirect to the front end
+    startup.getUserToken(request.args.get('code'))
+    return redirect('http://localhost:3000')
+
+@app.route('/playlists', methods=['GET'])
+def get_playlists():
+    token = startup.getAccessToken() # get the access token
+
+    # no user token, success false
+    if not token:
+        return jsonify({"playlists": [], "success": False})
+
+    # get the user's playlists
+    get = requests.get('https://api.spotify.com/v1/me/playlists', headers=token[1])
+    return jsonify({"playlists": get.json(), "success": True})
+
+@app.route('/playlist', methods=['GET'])
+def get_playlist():
+    token = startup.getAccessToken() # get the access token
+
+    # no playlist ID or user token found; error case
+    if (not request.args.get('id')) or not token:
+        return jsonify({"success": False})
+
+    # get the playlist
+    get = requests.get('https://api.spotify.com/v1/playlists/' + request.args.get('id'), headers=token[1])
+    return jsonify({"playlist": get.json(), "success": True})
+
+@app.route('/amILoggedIn', methods=['GET'])
+def amIloggedIn():
+    token = startup.getAccessToken() # get access token
+    
+    # user is logged into Spotify
+    if token:
+        return jsonify({"isLoggedIn": True})
+    
+    return jsonify({"isLoggedIn": False}) # user not logged into Spotify
