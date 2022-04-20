@@ -88,6 +88,33 @@ def getalbumsbyname():
 
 from googleapiclient import build
 
-service = build('youtube', 'v3')
-# ...
-service.close()
+# get the song name from user playlist on front end, then hit YouTube api and display list of related video titles on the front end
+@app.route('/youtubesearch', methods=['GET','POST'])
+def getVideosByName():
+    video_list = []
+    
+    youtube = build('youtube', 'v3', developer_key=api_keys.youtube_id)
+      
+    if request.method == 'POST':
+        vid_name = request.get_json()['videoName']
+        
+        results = youtube.Search.list('id,snippet', q=vid_name, maxResults=1);
+        videos = results['items']
+        # results_uri = results['videos']['items'][0]['uri']
+        #print(artist_uri)
+        for i in results.videos:
+            video = results.items[i];
+            # Logger.log('[%s] Title: %s', video.id.videoId, video.snippet.title);
+            videos.extend(results['items'])
+            
+        video_list = [video['name'] for video in videos]
+        #print(album_list)
+        
+    youtube.close()
+    
+    return jsonify({"videos": video_list})
+
+
+
+
+
