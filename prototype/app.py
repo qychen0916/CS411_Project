@@ -80,3 +80,14 @@ def getalbumsbyname():
         #print(album_list)
     
     return jsonify({"albums": album_list})
+
+
+###########################
+# YouTube API Integration #
+###########################
+
+from googleapiclient import build
+
+service = build('youtube', 'v3')
+# ...
+service.close()
