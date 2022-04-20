@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Albums from "./pages/Albums";
 import Playlists from "./pages/Playlists";
+import Playlist from "./pages/Playlist";
 
 // instead of accessing our api like this: axios.get('http://localhost:5000/users')
 // this allows us to do this: axios.get('/users')
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/albums" element={<Albums />} />
         <Route path="/playlists" element={<Playlists/>} />
+        <Route path="/playlist/:id" element={<Playlist/>} />
       </Route>
     </Routes>
   );
