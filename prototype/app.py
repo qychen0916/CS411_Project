@@ -125,3 +125,13 @@ def get_playlist():
     # get the playlist
     get = requests.get('https://api.spotify.com/v1/playlists/' + request.args.get('id'), headers=token[1])
     return jsonify({"playlist": get.json(), "success": True})
+
+@app.route('/amILoggedIn', methods=['GET'])
+def amIloggedIn():
+    token = startup.getAccessToken() # get access token
+    
+    # user is logged into Spotify
+    if token:
+        return jsonify({"isLoggedIn": True})
+    
+    return jsonify({"isLoggedIn": False}) # user not logged into Spotify
