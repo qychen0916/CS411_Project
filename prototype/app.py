@@ -135,3 +135,18 @@ def amIloggedIn():
         return jsonify({"isLoggedIn": True})
     
     return jsonify({"isLoggedIn": False}) # user not logged into Spotify
+
+
+
+###########################
+# YouTube API Integration #
+###########################
+
+from youtubesearchpython import VideosSearch
+
+# get the song name from user playlist on front end, then hit YouTube api and display list of related video titles on the front end
+@app.route('/youtubesearch/', methods=['GET'])
+def getVideosByName():
+    videosSearch = VideosSearch(request.args.get('video'), limit = 1)
+
+    return jsonify({"video": videosSearch.result()})

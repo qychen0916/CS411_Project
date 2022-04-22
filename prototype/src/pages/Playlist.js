@@ -4,6 +4,7 @@ import {
   Box, Typography, Grid, Card, CardContent, Stack, CircularProgress
 } from '@mui/material';
 import axios from 'axios';
+import Track from '../components/Track';
 
 const Playlist = () => {
   const { id } = useParams();
@@ -35,19 +36,7 @@ const Playlist = () => {
           <Stack spacing={3}>
             {playlist?.tracks.items.map(track => {
               return (
-                <Card>
-                  <CardContent>
-                    <Stack direction="row" spacing={2}>
-                    <img src={track.track.album.images[0].url} alt={track.track.name} height={128}/>
-                      <Box>
-                      <Typography variant="h6">{track.track.name}</Typography>
-                      <Typography variant="subtitle2">
-                        {track.track.artists.map(artist => artist.name).join(', ')}
-                      </Typography>
-                      </Box>
-                    </Stack>
-                  </CardContent>
-                </Card>
+                <Track trackName={track.track.name} trackArtists={track.track.artists} albumArt={track.track.album.images[0].url}/>
               )
             })}
           </Stack>

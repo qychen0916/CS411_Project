@@ -2,6 +2,7 @@
 
 # api keys
 api_keys.py
+youtube_client_secrets.json
 
 # dependencies
 node_modules
