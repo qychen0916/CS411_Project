@@ -1,7 +1,7 @@
 import requests
 from flask import Flask, jsonify, request, redirect, session
 from flask_pymongo import PyMongo
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 from bson.json_util import dumps, loads
 import datetime
@@ -150,3 +150,61 @@ def getVideosByName():
     videosSearch = VideosSearch(request.args.get('video'), limit = 1)
 
     return jsonify({"video": videosSearch.result()})
+
+######################
+# Favorite Playlists #
+######################
+
+# get favorites for the user
+@app.route('/get_favorites', methods=['GET'])
+@cross_origin(origin='*')
+def get_favorites():
+    token = startup.getAccessToken() # get the access token
+
+    # no playlist ID or user token found; error case
+    if not token:
+        return jsonify({"success": False})
+
+    # get the user's identity
+    get = requests.get('https://api.spotify.com/v1/me/', headers=token[1])
+
+    data = []
+
+    # get all the user's favorites from the database
+    for favorite in mongo.db.favorites.find({"user_id": get.json()['id']}):
+        favorite['_id'] = str(favorite['_id']) # https://stackoverflow.com/a/64267192
+        data.append(favorite)
+
+    # return favorites from the database, here data is a list
+    return jsonify({"success": True, "favorites": data})
+
+# toggle favorite for the user's playlist
+@app.route('/toggle_favorite', methods=['GET'])
+def toggle_favorite():
+    token = startup.getAccessToken() # get the access token
+
+    # no playlist ID or user token found; error case
+    if not token:
+        return jsonify({"success": False})
+
+    # get the user's identity
+    get = requests.get('https://api.spotify.com/v1/me/', headers=token[1])
+    
+    # find document in database
+    doc = mongo.db.favorites.find_one({
+        "user_id": get.json().get('id'),
+        "playlist_id": request.args.get('id')})
+    
+    if doc:
+        mongo.db.favorites.delete_one({
+        "user_id": get.json().get('id'),
+        "playlist_id": request.args.get('id')})
+
+    if not doc:
+        # insert document into database
+        mongo.db.favorites.insert_one({
+            "user_id": get.json().get('id'),
+            "playlist_id": request.args.get('id')})
+
+    # return success message
+    return jsonify({'success': True})
