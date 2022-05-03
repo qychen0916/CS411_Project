@@ -1,4 +1,4 @@
 # Requirements Analysis and User Stories 3
 
-## As a user, I want to list a few playlists as favorites, so they may be listed at the top of other playlists when I log in. 
-Once logged in and on the “Playlist” page, the user will find an empty star next to the “view” button for each playlist. By clicking on the star symbols, the playlist will be added to the application database as favorites. The playlist will automatically be placed first in front of other playlists. The next time when users logged into the same Spotify account, the favorites playlists will remain as favorites with the star symbols lit up and placed at the top of the playlists. 
+## As a user, I want to switch to a different account in order to access additional playlists. 
+During the use of the application, there will be a ‘Switch Account’ option on the home page. Upon clicking, the user will be logged out and redirected to the Spotify OAuth page. Once logged in with a new user account, the user will be redirected back to the home page of the application. And the playlist page should be updated with the new Spotify playlist under the new account.
