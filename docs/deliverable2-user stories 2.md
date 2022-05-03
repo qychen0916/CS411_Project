@@ -1,4 +1,4 @@
 # Requirements Analysis and User Stories 2
 
-## As a user I want to logout in order to protect my personal details.
-During the use of the application, there will be a ‘Logout’ option on the home page. Upon clicking, the user will be logged out and be returned to the home page. If the logout process fails, an error message shall inform the user that the logout has failed. Then, the user shall be prompted to attempt to logout again.
+## As a user, I want to switch to a different account in order to access additional playlists. 
+During the use of the application, there will be a ‘Switch Account’ option on the home page. Upon clicking, the user will be logged out and redirected to the Spotify OAuth page. Once logged in with a new user account, the user will be redirected back to the home page of the application. And the playlist page should be updated with the new Spotify playlist under the new account.
