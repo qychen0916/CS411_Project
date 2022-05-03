@@ -19,10 +19,9 @@ const App = () => {
     <Routes>
       {/* MainLayout is applied to everything inside of it */}
       <Route element={<MainLayout/>}>
-        <Route index element={<Home />} />
+        <Route index element={<Playlists />} />
         <Route path="/login" element={<Login />} />
         <Route path="/albums" element={<Albums />} />
-        <Route path="/playlists" element={<Playlists/>} />
         <Route path="/playlist/:id" element={<Playlist/>} />
       </Route>
     </Routes>

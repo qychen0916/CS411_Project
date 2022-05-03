@@ -27,8 +27,7 @@ const Navbar = () => {
           <Link variant="h6" color="primary.contrastText" underline="none" sx={{ flexGrow: 1 }} component={RouterLink} to="/">
             CS411 Project
           </Link>
-          <Button color="inherit" component={RouterLink} to="/">Home</Button>
-          <Button color="inherit" component={RouterLink} to="/playlists">Playlists</Button>
+          <Button color="inherit" component={RouterLink} to="/">Playlists</Button>
           <Button color="inherit" component={RouterLink} to="/login">
             {isLoggedIn ? 'Switch Accounts' : 'Login'}
           </Button>

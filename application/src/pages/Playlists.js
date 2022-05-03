@@ -33,12 +33,14 @@ const Playlists = () => {
 
   // sort playlist by favorites
   useEffect(() => {
-    setPlaylists([
-      ...playlists.filter(playlist => 
-        favorites.some(favorite => favorite?.playlist_id === playlist?.id)),
-      ...playlists.filter(playlist => 
-        !favorites.some(favorite => favorite?.playlist_id === playlist?.id))
-      ]);
+    if (playlists && favorites) {
+      setPlaylists([
+        ...playlists?.filter(playlist => 
+          favorites?.some(favorite => favorite?.playlist_id === playlist?.id)),
+        ...playlists?.filter(playlist => 
+          !favorites?.some(favorite => favorite?.playlist_id === playlist?.id))
+        ]);
+    }
   }, [favorites])
 
   // get user's playlists on mount
