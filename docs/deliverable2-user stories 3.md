@@ -1,4 +1,4 @@
 # Requirements Analysis and User Stories 3
 
-## As a user I want to see the number of songs transferred and know which songs in my list could not be found in Apple Music.
-After the transfer process, the names of the songs that were not found in Apple Music are printed out for the user to see. If all songs are found then no such message will appear. The other songs in the transfer list should be transferred as usual. The number of songs transferred will be printed as a message to the user.
+## As a user, I want to list a few playlists as favorites, so they may be listed at the top of other playlists when I log in. 
+Once logged in and on the “Playlist” page, the user will find an empty star next to the “view” button for each playlist. By clicking on the star symbols, the playlist will be added to the application database as favorites. The playlist will automatically be placed first in front of other playlists. The next time when users logged into the same Spotify account, the favorites playlists will remain as favorites with the star symbols lit up and placed at the top of the playlists. 
